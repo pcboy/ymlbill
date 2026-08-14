@@ -1,0 +1,11 @@
+name: Acme Consulting
+email: billing@acme.example
+phone: "+33 1 00 00 00 00"
+address: |
+  1 Main Street
+  75000 Paris
+  France
+payment_info: |
+  Bank: Example Bank
+  IBAN: FR12 3456 7890 1234 5678 901
+  BIC: EXAMPLEFR

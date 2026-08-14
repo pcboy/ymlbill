@@ -1,0 +1,30 @@
+document:
+  type: invoice
+  number: INV-2026-002
+  date: 2026-08-13
+  due_date: 2026-08-27
+  currency: EUR
+  tax_perc: 20
+
+seller:
+  name: Inline Seller
+  email: seller@example.com
+  address:
+    street: 10 Seller St
+    postal_code: "12345"
+    city: Seller City
+    country: France
+
+client:
+  name: Inline Client
+  email: client@example.com
+  address:
+    street: 20 Client Ave
+    postal_code: "54321"
+    city: Client City
+    country: France
+
+items:
+  - description: One-time service
+    quantity: 1
+    unit_price: 500.00

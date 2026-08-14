@@ -1,0 +1,64 @@
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.4
+  StringLiteralsFrozenByDefault: true
+  Exclude:
+    - "vendor/**/*"
+Style/AndOr:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+  EnforcedStyle: never
+MultilineTernaryOperator:
+  Enabled: false
+Layout/LineLength:
+  Max: 100
+  AllowedPatterns: ['\A#']
+Style/Alias:
+  Enabled: false
+Style/Lambda:
+  EnforcedStyle: literal
+Style/CaseLikeIf:
+  Enabled: true
+  MinBranchesCount: 3
+Style/EmptyCaseCondition:
+  Enabled: false
+Style/NegatedIf:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: False
+  EnforcedStyle: compact
+Metrics/MethodLength:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
+Style/ClassVars:
+  Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
+Metrics/BlockNesting:
+  Enabled: false
+Style/MultilineBlockChain:
+  Enabled: false
+Lint/AssignmentInCondition:
+  Enabled: false
+Naming/VariableNumber:
+  Enabled: false
+Style/ZeroLengthPredicate:
+  Enabled: false
+Style/NumericPredicate:
+  Enabled: false

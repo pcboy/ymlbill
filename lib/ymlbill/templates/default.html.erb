@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= data.document.type.capitalize %> <%= data.document.number %></title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body class="bg-neutral-100 p-4 text-xs text-neutral-800 antialiased">
+  <div class="mx-auto w-full max-w-3xl p-1">
+
+    <!-- Header: seller logo + document title -->
+    <div class="flex items-start justify-between mb-8">
+      <% if data.seller.logo %>
+        <img src="<%= logo_path(data.seller.logo) %>" alt="<%= data.seller.name %>" class="h-12 w-auto" />
+      <% else %>
+        <h1 class="bg-gradient-to-r from-pink-500 via-yellow-400 to-cyan-400 bg-clip-text text-2xl font-black italic tracking-tight text-transparent drop-shadow-md">
+          <%= data.seller.name %>
+        </h1>
+      <% end %>
+      <div class="text-right">
+        <h2 class="text-3xl font-light uppercase tracking-wide text-neutral-800"><%= data.document.type %></h2>
+        <p class="mt-1 text-sm text-neutral-500"><%= data.document.type.capitalize %> # <%= data.document.number %></p>
+      </div>
+    </div>
+
+    <!-- Seller (left) + Date/Client (right) -->
+    <div class="mb-6 flex justify-between">
+      <!-- Seller + Client side-by-side in a shared container -->
+      <div class="flex gap-12">
+        <div class="text-xs">
+          <p class="font-bold text-neutral-900"><%= data.seller.name %></p>
+          <% if data.seller.address %>
+            <p class="whitespace-pre-line text-neutral-600"><%= data.seller.address %></p>
+          <% end %>
+          <% if data.seller.email %><p class="mt-0.5 text-neutral-600"><%= data.seller.email %></p><% end %>
+          <% if data.seller.phone %><p class="text-neutral-600"><%= data.seller.phone %></p><% end %>
+        </div>
+
+        <div class="text-xs">
+          <p class="mb-0.5 text-neutral-500">Bill To:</p>
+          <p class="font-bold text-neutral-900"><%= data.client.name %></p>
+          <% if data.client.address %>
+            <p class="whitespace-pre-line text-neutral-600"><%= data.client.address %></p>
+          <% end %>
+          <% if data.client.email %><p class="mt-0.5 text-neutral-600"><%= data.client.email %></p><% end %>
+          <% if data.client.phone %><p class="text-neutral-600"><%= data.client.phone %></p><% end %>
+        </div>
+      </div>
+
+      <!-- Date block on the far right -->
+      <div class="w-56 text-xs">
+        <div class="flex justify-between py-0.5">
+          <span class="text-neutral-500">Date:</span>
+          <span class="text-neutral-900"><%= data.document.date %></span>
+        </div>
+        <% if data.document.due_date %>
+          <div class="flex justify-between py-0.5">
+            <span class="text-neutral-500">Due Date:</span>
+            <span class="text-neutral-900"><%= data.document.due_date %></span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Items table: dark rounded header bar, borderless rows -->
+    <table class="mb-4 w-full text-xs">
+      <thead>
+        <tr class="bg-neutral-700 text-xs font-medium text-white">
+          <th class="w-1/2 rounded-l-md border-r border-white/20 py-1.5 pl-3 pr-2 text-left">Item</th>
+          <th class="w-1/6 border-r border-white/20 py-1.5 px-2 text-center">Quantity</th>
+          <th class="w-1/6 border-r border-white/20 py-1.5 px-2 text-right">Rate</th>
+          <th class="w-1/6 rounded-r-md py-1.5 pl-2 pr-3 text-right">Amount</th>
+        </tr>
+      </thead>
+      <tbody class="text-xs">
+        <% data.items.each do |item| %>
+          <tr>
+            <td class="py-1 pl-3 pr-2 font-bold text-neutral-800"><%= item.description %></td>
+            <td class="py-1 px-2 text-center text-neutral-600"><%= item.quantity %></td>
+            <td class="py-1 px-2 text-right text-neutral-600"><%= money(item.unit_price, data.document.currency) %></td>
+            <td class="py-1 pl-2 pr-3 text-right text-neutral-600"><%= money(item.quantity * item.unit_price, data.document.currency) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <!-- Totals -->
+    <% subtotal = data.items.sum { |item| item.quantity * item.unit_price } %>
+    <% tax_amount = subtotal * (data.document.tax_perc.to_f / 100) %>
+    <div class="mb-6 flex justify-end">
+      <div class="w-56 text-xs">
+        <div class="flex justify-between border-b px-1   border-neutral-300 py-1 text-neutral-500">
+          <span>Subtotal</span>
+          <span class="font-semibold text-neutral-800"><%= money(subtotal, data.document.currency) %></span>
+        </div>
+        <div class="flex justify-between border-b px-1 border-neutral-300 py-1 text-neutral-500">
+          <span>Tax (<%= data.document.tax_perc %>%)</span>
+          <span class="font-semibold text-neutral-800"><%= money(tax_amount, data.document.currency) %></span>
+        </div>
+        <div class="flex justify-between bg-neutral-700 px-1 py-2 text-white">
+          <span class="font-bold">Total</span>
+          <span class="font-bold"><%= money(subtotal + tax_amount, data.document.currency) %></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Info + Notes side by side -->
+    <div class="mb-4 flex gap-4">
+      <% if data.seller.payment_info %>
+        <div class="flex-1 rounded-md bg-white p-3 shadow-sm">
+          <h3 class="mb-1 text-xs font-bold uppercase tracking-wide text-neutral-500">Payment Information</h3>
+          <p class="whitespace-pre-line text-neutral-600"><%= data.seller.payment_info %></p>
+        </div>
+      <% end %>
+
+      <% if data.notes %>
+        <div class="flex-1 rounded-md bg-white p-3 shadow-sm">
+          <h3 class="mb-1 text-xs font-bold uppercase tracking-wide text-neutral-500">Notes</h3>
+          <p class="whitespace-pre-line text-neutral-600"><%= data.notes %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</body>
+</html>

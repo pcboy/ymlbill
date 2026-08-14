@@ -1,0 +1,20 @@
+document:
+  type: invoice
+  number: INV-2026-001
+  date: 2026-08-13
+  due_date: 2026-08-27
+  currency: EUR
+  tax_perc: 20
+
+seller: sellers/acme.yml
+client: clients/client_1.yml
+
+items:
+  - description: Consulting services
+    quantity: 3
+    unit_price: 150.00
+  - description: Deployment support
+    quantity: 1
+    unit_price: 300.00
+
+notes: Payment due within 14 days.

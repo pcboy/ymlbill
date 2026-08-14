@@ -1,0 +1,6 @@
+document:
+  type: invoice
+  number: INVALID
+  items:
+    - description: Missing colon here
+      quantity this is invalid yaml

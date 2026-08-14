@@ -1,0 +1,78 @@
+document:
+  type: invoice
+  number: INV-2026-001
+  date: 2026-08-13
+  due_date: 2026-08-27
+  currency: EUR
+  tax_perc: 20
+
+seller:
+  name: Acme Consulting
+  email: billing@acme.example
+  logo: ./logo.png
+  phone: "+33 1 00 00 00 00"
+  address: |
+    1 Main Street
+    75000 Paris
+    France
+  payment_info: |
+    Bank: Example Bank
+    IBAN: FR12 3456 7890 1234 5678 901
+    BIC: EXAMPLEFR
+
+client:
+  name: Client Company
+  email: accounting@client.example
+  phone: "+33 4 00 00 00 00"
+  address: |
+    2 Market Street
+    69000 Lyon
+    France
+
+items:
+  - description: Backend API development - Payment gateway integration
+    quantity: 3
+    unit_price: 850.00
+  - description: Database schema design and optimization
+    quantity: 2
+    unit_price: 850.00
+  - description: REST API endpoint implementation
+    quantity: 4
+    unit_price: 850.00
+  - description: Code review and refactoring
+    quantity: 2
+    unit_price: 750.00
+  - description: CI/CD pipeline setup and configuration
+    quantity: 1.5
+    unit_price: 900.00
+  - description: Production deployment and monitoring setup
+    quantity: 1
+    unit_price: 950.00
+  - description: Technical documentation
+    quantity: 1
+    unit_price: 600.00
+  - description: Team knowledge transfer session
+    quantity: 0.5
+    unit_price: 700.00
+  - description: Bug fixes and hotfix deployment
+    quantity: 2
+    unit_price: 800.00
+  - description: Performance optimization - query tuning
+    quantity: 1.5
+    unit_price: 900.00
+  - description: Security audit and remediation
+    quantity: 2
+    unit_price: 950.00
+  - description: Architecture review and recommendations
+    quantity: 1
+    unit_price: 1000.00
+  - description: Emergency on-call support (weekend)
+    quantity: 0.5
+    unit_price: 1200.00
+  - description: Sprint planning and estimation
+    quantity: 0.5
+    unit_price: 700.00
+
+notes: |
+  Payment due within 14 days.
+  Thank you for your business!
