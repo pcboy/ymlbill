@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      
+      - name: Build the gem
+        run: nix develop -c gem build
+
+      - name: Build the nix package
+        run: nix build
+      
+      - name: Run RSpec tests
+        run: nix develop -c rspec
