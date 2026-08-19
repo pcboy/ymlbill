@@ -111,7 +111,7 @@
 
     <!-- Payment Info + Notes side by side -->
     <div class="mb-4 flex gap-4">
-      <% if data.seller.payment_info %>
+      <% if data.seller.payment_info && data.document.type == 'invoice' %>
         <div class="flex-1 rounded-md bg-white p-3 shadow-sm">
           <h3 class="mb-1 text-xs font-bold uppercase tracking-wide text-neutral-500">Payment Information</h3>
           <p class="whitespace-pre-line text-neutral-600"><%= data.seller.payment_info %></p>

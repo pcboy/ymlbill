@@ -216,6 +216,8 @@ items:
 
 A default template is included at [`lib/ymlbill/templates/default.html.erb`](lib/ymlbill/templates/default.html.erb).
 
+**Note:** With the bundled template, payment information only appears when `document.type` is set to `invoice` in the YAML file. Quotes will not display payment info.
+
 Create a custom ERB template to customize the invoice/quote appearance:
 
 ```erb
