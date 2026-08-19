@@ -11,8 +11,8 @@ RSpec.describe Ymlbill::PdfEngines::Chromium do
   end
 
   after do
-    File.delete(html_path)
-    File.delete(output_path)
+    File.delete(html_path) if File.exist?(html_path)
+    File.delete(output_path) if File.exist?(output_path)
   end
 
   describe '#render' do

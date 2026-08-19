@@ -40,11 +40,11 @@ RSpec.describe Ymlbill::DocumentLoader do
 
         expect(data['client']).to be_a(Hash)
         expect(data['client']['name']).to eq('Client Company')
-        expect(data['client']['address']['city']).to eq('Lyon')
+        expect(data['client']['address']).to include('Lyon')
 
         expect(data['seller']).to be_a(Hash)
         expect(data['seller']['name']).to eq('Acme Consulting')
-        expect(data['seller']['address']['city']).to eq('Paris')
+        expect(data['seller']['address']).to include('Paris')
       end
     end
 
