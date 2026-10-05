@@ -100,6 +100,8 @@ items:
 ymlbill generate invoice.yml
 ```
 
+By default, this creates `invoice.pdf` next to `invoice.yml`.
+
 ### Custom template
 
 ```bash
@@ -115,7 +117,7 @@ ymlbill generate invoice.yml -o output.pdf
 ### Options
 
 - `-t, --template PATH` - Custom HTML ERB template
-- `-o, --output PATH` - Output PDF path
+- `-o, --output PATH` - Output PDF path (default: next to the input YAML file)
 - `--version` - Print version
 - `-h, --help` - Show help
 

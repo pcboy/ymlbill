@@ -32,6 +32,14 @@ RSpec.describe Ymlbill::CLI do
         expect(Ymlbill::PdfEngine).to have_received(:build)
         expect(fake_engine).to have_received(:render)
       end
+
+      it 'defaults the output path next to the input YAML file' do
+        Ymlbill::CLI.start(['generate', invoice_path])
+
+        expect(fake_engine).to have_received(:render).with(
+          hash_including(output_path: File.join(fixtures_dir, 'invoice.pdf'))
+        )
+      end
     end
 
     context 'with --output flag' do

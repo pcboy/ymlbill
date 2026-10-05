@@ -6,7 +6,7 @@ module Ymlbill
     desc 'generate INPUT_YAML', 'Generate PDF invoice/quote from YAML file'
     option :template, aliases: ['-t'], type: :string, desc: 'Path to custom HTML ERB template'
     option :output, aliases: ['-o'], type: :string,
-                    desc: 'Output PDF path (default: input basename + .pdf)'
+                    desc: 'Output PDF path (default: next to input YAML file)'
     option :debug_html, aliases: ['-d'], type: :boolean, default: false,
                         desc: 'Keep HTML file for debugging'
 
@@ -59,8 +59,8 @@ module Ymlbill
     end
 
     def default_output_path(input)
-      basename = File.basename(input, '.*')
-      "#{basename}.pdf"
+      input_path = File.expand_path(input)
+      "#{File.join(File.dirname(input_path), File.basename(input_path, '.*'))}.pdf"
     end
   end
 end
